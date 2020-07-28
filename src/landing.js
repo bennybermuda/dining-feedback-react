@@ -6,6 +6,17 @@ export class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick() {
+		var typeEle = document.getElementById("user-option");
+		var type = typeEle.options[typeEle.selectedIndex].text;
+		var hallEle = document.getElementById("room");
+		var hall = hallEle.options[hallEle.selectedIndex].text;
+		this.props.setHall(hall);
+		this.props.setType(type);
+		this.props.onLogin();
 	}
 
 	handleChange(e) {
@@ -55,7 +66,7 @@ export class Dashboard extends React.Component {
 								<option value="Arrillaga Family Dining">Arrillaga Family Dining</option>
 							</select>
 						</div>
-						<button type="submit" className="btn" onClick={this.props.onLogin}>Join Chat</button>
+						<button type="submit" className="btn" onClick={this.handleClick}>Join Chat</button>
 					
 				</main>
 			</div>

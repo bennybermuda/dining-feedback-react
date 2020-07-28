@@ -5,15 +5,24 @@ export default class Chat extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      diningHall: "none",
-      currUserType: "none",
+      diningHall: this.props.hall,
+      currUserType: this.props.usertype,
       messages: [],
       currChannel: "Announcements",
       numStudents: 0,
       numDAs: 0
     }
+    this.incrementCount = this.incrementCount.bind(this);
+  }
+  incrementCount() {
+    if (this.state.currUserType === 'Student'){
+      this.state.numStudents += 1;
+    } else {
+      this.state.numDAs += 1;
+    }
   }
   render () {
+    this.incrementCount();
     return (
       <div className="chat-container">
         <header className="chat-header">
@@ -25,7 +34,16 @@ export default class Chat extends React.Component {
             <h3><i className="fas fa-comments"></i> Room Name:</h3>
             <h2 id="room-name">{this.state.diningHall}</h2>
             <h3><i className="fas fa-channels"></i> Channels:</h3>
-            <ul id="channels"></ul>
+            <ul id="channels">
+              <button className="btn">Announcements</button>
+              <button className="btn">Praise</button>
+              <button className="btn">Critique</button>
+              <button className="btn">Requests</button>
+            </ul>
+            <h3><i className="fas fa-comments"></i> Current Users:</h3>
+            <h2 id="room-name">{this.state.numStudents} students</h2>
+            <h2 id="room-name">{this.state.numDAs} DA's</h2>
+
           </div>
           <div className="chat-messages">
             <ul id="messages"></ul>
