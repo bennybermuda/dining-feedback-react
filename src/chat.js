@@ -1,33 +1,50 @@
 import React from "react";
 
-export default function Chat() {
+export default class Chat extends React.Component {
+//export default function Chat() {
+  constructor(props){
+    super(props);
+    this.state = {
+      diningHall: "none",
+      currUserType: "none",
+      messages: [],
+      currChannel: "Announcements",
+      numStudents: 0,
+      numDAs: 0
+    }
+  }
+  render () {
     return (
-        <div class="chat-container">
-          <header class="chat-header">
-            <h1><i class="fas fa-smile"></i> Dining Feedback</h1>
-            <button class="btn">Leave Room</button>
-          </header>
-          <main class="chat-main">
-            <div class="chat-sidebar">
-              <h3><i class="fas fa-comments"></i> Room Name:</h3>
-              <h2 id="room-name"></h2>
-              <h3><i class="fas fa-channels"></i> Channels:</h3>
-              <ul id="channels"></ul>
-            </div>
-            <div class="chat-messages"></div>
-          </main>
-          <div class="chat-form-container">
-            <form id="chat-form">
-              <input
-                id="msg"
-                type="text"
-                placeholder="Enter Message"
-                required
-                autocomplete="off"
-              />
-              <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
-            </form>
+      <div className="chat-container">
+        <header className="chat-header">
+          <h1><i className="fas fa-smile"></i> Dining Feedback</h1>
+          <button className="btn" onClick={this.props.goHome}>Leave Room</button>
+        </header>
+        <main className="chat-main">
+          <div className="chat-sidebar">
+            <h3><i className="fas fa-comments"></i> Room Name:</h3>
+            <h2 id="room-name">{this.state.diningHall}</h2>
+            <h3><i className="fas fa-channels"></i> Channels:</h3>
+            <ul id="channels"></ul>
           </div>
+          <div className="chat-messages">
+            <ul id="messages"></ul>
+          </div>
+        </main>
+        <div className="chat-form-container">
+          <form id="chat-form">
+            <input
+              id="msg"
+              type="text"
+              placeholder="Enter Message"
+              required
+              autoComplete="off"
+            />
+            <button className="btn"><i className="fas fa-paper-plane"></i> Send</button>
+          </form>
         </div>
-      );
+      </div>
+    );
+  }
+    
 }
