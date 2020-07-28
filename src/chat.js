@@ -5,7 +5,7 @@ export default function Chat() {
         <div class="chat-container">
           <header class="chat-header">
             <h1><i class="fas fa-smile"></i> Dining Feedback</h1>
-            <a href="index.html" class="btn">Leave Room</a>
+            <button class="btn">Leave Room</button>
           </header>
           <main class="chat-main">
             <div class="chat-sidebar">

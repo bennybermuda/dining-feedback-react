@@ -25,8 +25,10 @@ export default function Login(props) {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <button onClick={handleSubmit}>Login</button>
+        
         <div>{error}</div>
       </div>
     );
     }
+
+//<button onClick={handleSubmit}>Login</button> --> Line 28

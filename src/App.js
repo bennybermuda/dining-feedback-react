@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import './style.css';
 import Chat from './chat';
-import Login from './login';
-import Landing from './landing';
+
+import {Dashboard} from './landing';
 
 //we export default so i can use what's inside in other js files
 export default function App() {
@@ -12,8 +12,8 @@ export default function App() {
 
   return (
     <div className="App">
-      {!authenticated && <Landing onLogin={() => setAuthenticated(true)} />}
-      {!!authenticated && <Chat />}
+      {!authenticated && <Dashboard onLogin={() => setAuthenticated(true)} />}
+      {!!authenticated && <Chat goHome={() => setAuthenticated(false)} />}
     </div>  
   );
   
