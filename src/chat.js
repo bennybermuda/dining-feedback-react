@@ -8,6 +8,7 @@ export default class Chat extends React.Component {
       diningHall: this.props.hall,
       currUserType: this.props.usertype,
       messages: {},
+      msgs: [],
       currChannel: "Announcements",
       numStudents: 0,
       numDAs: 0,
@@ -16,6 +17,9 @@ export default class Chat extends React.Component {
     this.incrementCount = this.incrementCount.bind(this);
     this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+  componentWillMount() {
+    this.incrementCount();
   }
   handleInputChange(e) {
     this.setState({currTextInput: e.target.value});
@@ -28,6 +32,8 @@ export default class Chat extends React.Component {
     //e.nativeEvent.stopImmediatePropagation();
     var timestamp = (new Date()).getTime();
     this.state.messages[this.state.currUserType +'-message-' + timestamp] = message;
+    this.state.msgs.push(message);
+    this.setState({msgs: this.state.msgs});
     this.setState({messages: this.state.messages});
     console.log(this.state.messages);
     this.setState({currTextInput: ''});
@@ -42,7 +48,10 @@ export default class Chat extends React.Component {
     }
   }
   render () {
-    this.incrementCount();
+    //this.incrementCount();
+    const msgList = this.state.msgs.map(msg =>
+      <li>{msg}</li>
+    );
     return (
       <div className="chat-container">
         <header className="chat-header">
@@ -67,7 +76,7 @@ export default class Chat extends React.Component {
           </div>
           <div className="chat-messages">
             <ul id="messages">
-              yeet
+              {msgList}
             </ul>
           </div>
         </main>
