@@ -79,7 +79,7 @@ export default class Chat extends React.Component {
               placeholder="Enter Message"
               required
               autoComplete="off"
-              
+              value={this.state.currTextInput}
               onChange={this.handleInputChange}
             />
             <button type="submit" className="btn"><i className="fas fa-paper-plane"></i> Send</button>
