@@ -1,4 +1,5 @@
 import React from "react";
+import io from 'socket.io-client';
 
 export default class Chat extends React.Component {
 //export default function Chat() {
@@ -18,8 +19,12 @@ export default class Chat extends React.Component {
     this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     this.incrementCount();
+    this.socket = io("localhost:3000");
+    this.socket.on('message', (message) => {
+      this.setState({msgs: [message, ...this.state.msgs]});
+    });
   }
   handleInputChange(e) {
     this.setState({currTextInput: e.target.value});
@@ -28,15 +33,19 @@ export default class Chat extends React.Component {
     var message = this.state.currTextInput;
     console.log(message);
     e.preventDefault();
-    //e.stopPropagation();
-    //e.nativeEvent.stopImmediatePropagation();
-    var timestamp = (new Date()).getTime();
-    this.state.messages[this.state.currUserType +'-message-' + timestamp] = message;
-    this.state.msgs.push(message);
-    this.setState({msgs: this.state.msgs});
-    this.setState({messages: this.state.messages});
-    console.log(this.state.messages);
-    this.setState({currTextInput: ''});
+    if (message) {
+      //e.stopPropagation();
+      //e.nativeEvent.stopImmediatePropagation();
+      var timestamp = (new Date()).getTime();
+      this.state.messages[this.state.currUserType +'-message-' + timestamp] = message;
+      this.state.msgs.push(message);
+      this.setState({msgs: this.state.msgs});
+      this.setState({messages: this.state.messages});
+      console.log(this.state.messages);
+      this.setState({currTextInput: ''});
+      this.socket.emit("message", message);
+    }
+    
   }
   incrementCount() {
     if (this.state.currUserType === 'Student'){
@@ -50,7 +59,7 @@ export default class Chat extends React.Component {
   render () {
     //this.incrementCount();
     const msgList = this.state.msgs.map(msg =>
-      <li>{msg}</li>
+      <li className="message">{this.state.currUserType}: {msg}</li>
     );
     return (
       <div className="chat-container">
