@@ -19,8 +19,10 @@ export default class Chat extends React.Component {
     this.handleMessageSubmit = this.handleMessageSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
-  componentDidMount() {
+  componentWillMount() {
     this.incrementCount();
+  }
+  componentDidMount() {
     this.socket = io("localhost:3000");
     this.socket.on('message', (message) => {
       this.setState({msgs: [message, ...this.state.msgs]});
