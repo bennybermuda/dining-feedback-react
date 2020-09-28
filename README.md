@@ -14,7 +14,7 @@ TO RUN:
 <br>
 `node server.js` for the server side
 <br>
-`Go to the localhost port that the client side is running on (i.e. localhost/3000)
+`Go to the localhost port that the client side is running on` (i.e. localhost/3000)
 <br>
 
 -A persistent, real-time chat web app meant to bridge the communications gap between students and dining hall staff regarding feedback for the dining experience.
