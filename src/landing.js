@@ -2,7 +2,7 @@ import React from 'react';
 import Login from './login';
 
 
-export class Dashboard extends React.Component {
+export default class Dashboard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.handleChange = this.handleChange.bind(this);
